@@ -43,8 +43,8 @@ const groups = function () {
         posts: groupedPosts[key]
     }))
 
-    // sort years by latest first
-    groupedPostsArray.sort((a, b) => b.year - a.year)
+    // sort years by latest first    
+    groupedPostsArray.sort((a, b) => parseInt(b.year) - parseInt(a.year))
     return groupedPostsArray;
 }();
 

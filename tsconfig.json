@@ -2,13 +2,11 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": ".",
-    "strictNullChecks": false,
-    /* JSON標準では内部コメント不許可なので注意JSONC形式のみ可能:、TypeScriptの型チェックを大幅に緩和する　ここから */
+    "strictNullChecks": false,    
     "strict": false,
     "importsNotUsedAsValues": "remove",
     "noImplicitAny": false,
-    "esModuleInterop": true,
-    /* JSON標準では内部コメント不許可なので注意JSONC形式のみ可能:、TypeScriptの型チェックを大幅に緩和する　ここまで */
+    "esModuleInterop": true,    
     "allowJs": true,
     "plugins": [
       {
