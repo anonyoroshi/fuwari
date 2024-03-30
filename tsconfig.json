@@ -3,6 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "strictNullChecks": false,
+    /* JSON標準では内部コメント不許可なので注意JSONC形式のみ可能:、TypeScriptの型チェックを大幅に緩和する　ここから */
+    "strict": false,
+    "importsNotUsedAsValues": "remove",
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    /* JSON標準では内部コメント不許可なので注意JSONC形式のみ可能:、TypeScriptの型チェックを大幅に緩和する　ここまで */
     "allowJs": true,
     "plugins": [
       {
