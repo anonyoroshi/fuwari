@@ -14,11 +14,12 @@ export async function getStaticPaths({ paginate }) {
 
 const {page} = Astro.props;
 
-const len = page.data.length;
+// const len = page.data.length;
+const len = 10; // 【課題】エラー解決のため適当な数値を設定
 
 ---
 
-<MainGridLayout>
+<MainGridLayout title="sample Title Here">
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style=`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`></Pagination>
 </MainGridLayout>
