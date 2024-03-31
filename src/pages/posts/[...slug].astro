@@ -69,6 +69,8 @@ const { remarkPluginFrontmatter } = await entry.render();
                         published={entry.data.published}
                         tags={entry.data.tags}
                         category={entry.data.category}
+                        list={{ key1: "samplekey0331a", key2: true }}
+                        hideTagsForMobile={false}
                 ></PostMetadata>
                 {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
             </div>
@@ -90,19 +92,19 @@ const { remarkPluginFrontmatter } = await entry.render();
     </div>
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
-        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">
-            {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4" >
+        <a href={getPostUrlBySlug((entry.data as any).nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">
+            {(entry.data as any).nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4" >
                 <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-                    {entry.data.nextTitle}
+                    {(entry.data as any).nextTitle}
                 </div>
             </div>}
         </a>
-
-        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden active:scale-95">
-            {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-end gap-4">
+    
+        <a href={getPostUrlBySlug((entry.data as any).prevSlug)} class="w-full font-bold overflow-hidden active:scale-95">
+            {(entry.data as any).prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-end gap-4">
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-                    {entry.data.prevTitle}
+                    {(entry.data as any).prevTitle}
                 </div>
                 <Icon name="material-symbols:chevron-right-rounded" size={32} class="text-[var(--primary)]" />
             </div>}

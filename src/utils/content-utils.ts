@@ -12,13 +12,23 @@ export async function getSortedPosts() {
     return dateA > dateB ? -1 : 1
   })
 
+  // for (let i = 1; i < sorted.length; i++) {
+  //   sorted[i].data.nextSlug = sorted[i - 1].slug
+  //   sorted[i].data.nextTitle = sorted[i - 1].data.title
+  // }
+  // for (let i = 0; i < sorted.length - 1; i++) {
+  //   sorted[i].data.prevSlug = sorted[i + 1].slug
+  //   sorted[i].data.prevTitle = sorted[i + 1].data.title
+  // }
+  
+  // sorted配列の各要素（投稿）に対して、前後の投稿のslugとtitleを設定しています。これにより、各投稿から前後の投稿へのリンクを作成することが可能になります。
   for (let i = 1; i < sorted.length; i++) {
-    sorted[i].data.nextSlug = sorted[i - 1].slug
-    sorted[i].data.nextTitle = sorted[i - 1].data.title
+    (sorted[i].data as any).nextSlug = sorted[i - 1].slug;
+    (sorted[i].data as any).nextTitle = sorted[i - 1].data.title
   }
   for (let i = 0; i < sorted.length - 1; i++) {
-    sorted[i].data.prevSlug = sorted[i + 1].slug
-    sorted[i].data.prevTitle = sorted[i + 1].data.title
+    (sorted[i].data as any).prevSlug = sorted[i + 1].slug;
+    (sorted[i].data as any).prevTitle = sorted[i + 1].data.title
   }
 
   return sorted
