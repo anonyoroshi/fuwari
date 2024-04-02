@@ -25,6 +25,8 @@ const enableBanner = siteConfig.banner.enable
 ---
 
 <!-- Layoutコンポーネント: このコンポーネントはページ全体のレイアウトを制御します。titleとbannerのプロパティを受け取ります。 -->
+<!-- Layoutコンポーネントだけを削除すると、ヘッダー→サイドバー→全記事(４記事)→フッターが、CSS制御がほぼない状態となり、1列に入って縦に表示されることを確認 -->
+<!-- Layoutコンポーネント内でCSS制御を行い、対象記事以外は非表示にするような実装と思われる。 -->
 <Layout title={title} banner={banner}>
 <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
     mx-auto gap-4 relative px-0 md:px-4"
@@ -49,8 +51,15 @@ const enableBanner = siteConfig.banner.enable
         <!-- overflow-hiddenは、この要素の内部で発生する可能性のあるオーバーフロー（内容が要素のボックスを超えて表示されること）を隠します。-->
         <!-- これは、長いテキストがレイアウトを壊すのを防ぐために使用されます。 -->
 
-        <!-- main要素: ここにページの主要なコンテンツが表示されます。 -->
+        <!-- main要素: ここにページの主要なコンテンツが表示されます。 -->        
+        <!-- id="swup"は、SwupというJavaScriptライブラリを指定するために使用されています。このライブラリは、ページ遷移をスムーズにするためのものです。 -->
+        <!-- transition-fadeは、ページ遷移時にフェードイン/フェードアウトのアニメーションを実行するためのクラスです。 -->
         <!-- <slot></slot>タグは、このコンポーネントを使用する他のAstroファイルからのコンテンツを受け入れるためのプレースホルダーです。 -->
+        <!-- したがって、<slot></slot>に表示されるコンテンツは、フェードイン/フェードアウトのアニメーション付きで表示されます。 -->
+
+        <!-- Astroでは、importしたコンポーネントはそのimport名をタグ名として使用できます。 -->
+        <!-- したがって、呼出し先のファイルで、MainGridLayoutという名前でコンポーネントをimportした場合、<MainGridLayout></MainGridLayout>という形で、そのコンポーネントを使用することができます。 -->
+        <!-- そして、そのコンポーネント内部にある<slot></slot>は、そのタグ内に配置したコンテンツを受け入れるプレースホルダーとして機能します。 -->
         <main id="swup" class="transition-fade">
             <slot></slot>
         </main>
