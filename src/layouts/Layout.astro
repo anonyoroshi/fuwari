@@ -64,7 +64,7 @@ if (title) {
 ---
 
 <!DOCTYPE html>
-<html lang="en" isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang="en" data-isHome={isHomePage} data-pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
 	<head>
 
 		<title>{pageTitle}</title>
@@ -87,7 +87,7 @@ if (title) {
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 	</head>
-	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
+	<body class=" min-h-screen transition " class:list={[{"data-is-home": isHomePage, "enable-banner": enableBanner}]}>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
 		<div id="banner-wrapper" class="absolute w-full">
@@ -116,7 +116,7 @@ if (title) {
 	*/
 
 	/*
-	.enable-banner.is-home #banner-wrapper {
+	.enable-banner.data-is-home #banner-wrapper {
 		@apply h-[var(--banner-height)] md:h-[var(--banner-height-home)]
 	}
 	*/
@@ -125,7 +125,7 @@ if (title) {
 	}
 
 	/*
-	.enable-banner.is-home #top-row {
+	.enable-banner.data-is-home #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)] md:h-[calc(var(--banner-height-home)_-_4.5rem)]
 	}
 	*/
@@ -189,7 +189,9 @@ function disableAnimation() {
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
-		let tDom = event.target;
+		// EventTarget型のオブジェクト（この場合はevent.target）を、
+		// Node型のメソッド（この場合はcontains）に渡すために型変換
+		let tDom = event.target as Node;
 		for (let ig of ignores) {
 			let ie = document.getElementById(ig)
 			if (ie == tDom || (ie?.contains(tDom))) {
@@ -221,7 +223,7 @@ function loadHue() {
 
 function setBannerHeight() {
 	const banner = document.getElementById('banner-wrapper');
-	if (document.documentElement.hasAttribute('isHome')) {
+	if (document.documentElement.hasAttribute('data-isHome')) {
 		banner.classList.remove('banner-else');
 		banner.classList.add('banner-home');
 	} else {
@@ -274,16 +276,24 @@ init();
 /* astro:after-swap event happened before swap animation */
 document.addEventListener('astro:after-swap', init);
 
+// TypeScriptにwindowオブジェクトがswupプロパティを持つことを伝える
+// これにより、TypeScriptはwindow.swupを認識し、エラーを回避できる
+declare global {
+  interface Window {
+    swup: any; // Replace 'any' with the actual type of 'swup' if known
+  }
+}
+
 const setup = () => {
 	// TODO: temp solution to change the height of the banner
 /*
 	window.swup.hooks.on('animation:out:start', () => {
-		const path = window.location.pathname
+		const path = window.location.data-pathname
 		const body = document.querySelector('body')
-		if (path[path.length - 1] === '/' && !body.classList.contains('is-home')) {
-			body.classList.add('is-home')
-		} else if (path[path.length - 1] !== '/' && body.classList.contains('is-home')) {
-			body.classList.remove('is-home')
+		if (path[path.length - 1] === '/' && !body.classList.contains('data-is-home')) {
+			body.classList.add('data-is-home')
+		} else if (path[path.length - 1] !== '/' && body.classList.contains('data-is-home')) {
+			body.classList.remove('data-is-home')
 		}
 	})
 */
