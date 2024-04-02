@@ -22,6 +22,9 @@ const isHomePage = pathsEqual(Astro.url.pathname, '/')
 const enableBanner = siteConfig.banner.enable
 // このMainGridLayout.astroファイルは、Astro.jsを使用したウェブページのメインレイアウトを定義しています。
 // メインレイアウトは、ウェブサイトの全体的な枠組みを定義するもので、通常はヘッダー、ボディ（またはコンテンツエリア）、フッターなどの主要なセクションを含みます。
+// Asttro+Tailwind CSSでレイアウトの配置を担当するのは、Tailwind CSSとなります。
+// 特に、Tailwind CSSのgrid-cols-{n}とgrid-rows-{n}クラスは、グリッドレイアウトの列と行の数をそれぞれ定義します。
+// これらのクラスを使用することで、ページのレイアウトを柔軟に制御することができます。
 ---
 
 <!-- Layoutコンポーネント: このコンポーネントはページ全体のレイアウトを制御します。titleとbannerのプロパティを受け取ります。 -->
@@ -33,6 +36,18 @@ const enableBanner = siteConfig.banner.enable
 <!-- | `Footer` | フッター | 3行目、2列目に表示されます。 | -->
 <!-- | `BackToTop` | 画面右下 | ページの右下に表示されます。 | -->
 <Layout title={title} banner={banner}>
+<!-- 以下のdivタグに、Tailwind CSSを使用してWEBUIページのレイアウトを詳細に定義しています。 -->
+<!-- max-w-[var(--page-width)]: ページの最大幅をCSS変数--page-widthに設定します。 -->
+<!-- min-h-screen: ページの最小高さを画面の高さに設定します。-->
+<!-- 要素の最小高さはデバイスの画面の高さ（ビューポートの高さ）に設定されます。これにより、要素は画面を埋め尽くし、画面が大きくなってもその高さが維持されます。 -->
+<!-- grid: グリッドレイアウトを適用します。 -->
+<!-- grid-cols-[17.5rem_auto]: 2列のグリッドを作成し、1列目の幅を17.5rem、2列目の幅を自動に設定します。 -->
+<!-- grid-rows-[auto_auto_1fr_auto]: 4行のグリッドを作成し、1行目と2行目と4行目の高さを内容に合わせて自動に設定し、3行目の高さを残りの空間に設定します。 -->
+<!-- lg:grid-rows-[auto_1fr_auto]: 画面がlg（大）サイズ以上の場合、3行のグリッドを作成し、1行目と3行目の高さを内容に合わせて自動に設定し、2行目の高さを残りの空間に設定します。 -->
+<!-- mx-auto: 左右のマージンを自動に設定し、要素を水平方向に中央に配置します。 -->
+<!-- gap-4: グリッドアイテム間のギャップを1rem（4の値はTailwindのスペーシングスケールに基づいています）に設定します。 -->
+<!-- relative: 要素の位置を相対位置に設定します。これは、後続の絶対位置要素の基準点となります。 -->
+<!-- px-0 md:px-4: 横方向のパディングを0に設定し、画面がmd（中）サイズ以上の場合は1remに設定します。 -->
 <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
     mx-auto gap-4 relative px-0 md:px-4"
 >
