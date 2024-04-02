@@ -25,8 +25,13 @@ const enableBanner = siteConfig.banner.enable
 ---
 
 <!-- Layoutコンポーネント: このコンポーネントはページ全体のレイアウトを制御します。titleとbannerのプロパティを受け取ります。 -->
-<!-- Layoutコンポーネントだけを削除すると、ヘッダー→サイドバー→全記事(４記事)→フッターが、CSS制御がほぼない状態となり、1列に入って縦に表示されることを確認 -->
-<!-- Layoutコンポーネント内でCSS制御を行い、対象記事以外は非表示にするような実装と思われる。 -->
+<!-- このMainGridLayout.astroファイル内コード記述通り、以下の形で、各コンポーネントの配置場所の設定を行っています。 -->
+<!-- | `Layout` | 全体 | ページ全体のレイアウトを制御します。 | -->
+<!-- | `Navbar` | ヘッダー | ページのナビゲーションバーを表示します。 | -->
+<!-- | `SideBar` | サイドバー | 通常画面デバイスでは3行目から4行目、大画面デバイスでは2行目から3行目、■1列目■に表示されます。 | -->
+<!-- | `Main Content` | メインエリア | 2行目から3行目、■2列目■に表示されます。 | -->
+<!-- | `Footer` | フッター | 3行目、2列目に表示されます。 | -->
+<!-- | `BackToTop` | 画面右下 | ページの右下に表示されます。 | -->
 <Layout title={title} banner={banner}>
 <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
     mx-auto gap-4 relative px-0 md:px-4"
