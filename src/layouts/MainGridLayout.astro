@@ -1,4 +1,9 @@
 ---
+// MainGridLayout.astro
+// Astroファイルでは、---で囲まれた部分は「フロントマター」と呼ばれ、メタデータやスクリプトを記述するための特別なセクションです。
+// このセクションは通常、ファイルの最上部に配置されます。
+// フロントマターは、MarkdownやJekyllなどの他の静的サイトジェネレータでもよく使われています。
+// Astroでは、このフロントマター内にJavaScriptやTypeScriptのコードを記述することができます。
 import Layout from "./Layout.astro";
 import Navbar from "@components/Navbar.astro";
 import SideBar from "@components/widget/SideBar.astro";
@@ -15,30 +20,48 @@ interface Props {
 const { title, banner } = Astro.props
 const isHomePage = pathsEqual(Astro.url.pathname, '/')
 const enableBanner = siteConfig.banner.enable
-
+// このMainGridLayout.astroファイルは、Astro.jsを使用したウェブページのメインレイアウトを定義しています。
+// メインレイアウトは、ウェブサイトの全体的な枠組みを定義するもので、通常はヘッダー、ボディ（またはコンテンツエリア）、フッターなどの主要なセクションを含みます。
 ---
 
+<!-- Layoutコンポーネント: このコンポーネントはページ全体のレイアウトを制御します。titleとbannerのプロパティを受け取ります。 -->
 <Layout title={title} banner={banner}>
 <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
     mx-auto gap-4 relative px-0 md:px-4"
 >
     <div id="top-row" class="col-span-2 grid-rows-1 z-50 onload-animation" class:list={[""]}>
         <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->
+        <!-- Navbarコンポーネント: これはページのナビゲーションバーを表示します。 -->
         <Navbar></Navbar>
     </div>
-    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation"></SideBar>
+    <!-- SideBarコンポーネント: これはページのサイドバーを表示します。 -->
+    <!-- Tailwind CSSをpackage.jsonに記載し、本プロジェクトにインストールしているため、そのクラスをHTML要素に直接適用することが可能です。 -->
+    <!-- Tailwind CSSはユーティリティファーストのCSSフレームワークで、CSS Gridやメディアクエリなどの機能を簡単に利用できるようにするためのクラスを提供しています。 -->
+    <!-- 例えば、row-start-3 row-end-4やlg:row-start-2 lg:row-end-3などのクラスは、Tailwind CSSが提供するCSS Gridのクラスです。 -->
+    <!-- また、lg:のような接頭辞は、Tailwind CSSのレスポンシブデザインの機能を表しています。この接頭辞をクラスに追加することで、特定の画面サイズ以上でのみそのクラスを適用することができます。 -->
+    <!-- 通常画面デバイスでは、グリッドレイアウトの3行目から始まり、4行目で終わる、2列分の幅を占めることを示す。 -->
+    <!-- 大画面デバイス(lg)では、グリッドレイアウトの2行目から始まり、3行目で終わる、1列分の幅、画面デバイスでは最大幅を17.5remに制限することを示す。 -->
+    <!-- onload-animation: ページ読み込み時にアニメーションを実行することを示します。 -->
+    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation">
+    </SideBar>
 
     <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
-        <!-- the overflow-hidden here prevent long text break the layout-->
+        <!-- overflow-hiddenは、この要素の内部で発生する可能性のあるオーバーフロー（内容が要素のボックスを超えて表示されること）を隠します。-->
+        <!-- これは、長いテキストがレイアウトを壊すのを防ぐために使用されます。 -->
+
+        <!-- main要素: ここにページの主要なコンテンツが表示されます。 -->
+        <!-- <slot></slot>タグは、このコンポーネントを使用する他のAstroファイルからのコンテンツを受け入れるためのプレースホルダーです。 -->
         <main id="swup" class="transition-fade">
             <slot></slot>
         </main>
 
     </div>
 
+    <!-- Footerコンポーネント: これはページのフッターを表示します。 -->
     <div id="footer" class="grid-rows-3 col-span-2 mt-4 onload-animation">
         <Footer></Footer>
     </div>
+    <!-- BackToTopコンポーネント: これは「トップに戻る」ボタンを表示します。 -->
     <BackToTop></BackToTop>
 </div>
 </Layout>
