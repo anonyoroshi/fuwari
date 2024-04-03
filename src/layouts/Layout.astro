@@ -21,27 +21,29 @@ const isHomePage = pathsEqual(Astro.url.pathname, '/');
 // 現在のURLのパス名を取得してtestPathNameという定数に格納しています。
 const testPathName = Astro.url.pathname;
 
-const anim = {
-	old: {
-		name: 'fadeIn',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'forwards',
-		mixBlendMode: 'normal',
-	},
-	new: {
-		name: 'fadeOut',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'backwards',
-		mixBlendMode: 'normal',
-	}
-};
+// 【課題】【エラーにならないか検証目的】下記、animとmyFadeは定義されているが使われてない模様なので、コメントアウト　ここから
+// const anim = {
+// 	old: {
+// 		name: 'fadeIn',
+// 		duration: '4s',
+// 		easing: 'linear',
+// 		fillMode: 'forwards',
+// 		mixBlendMode: 'normal',
+// 	},
+// 	new: {
+// 		name: 'fadeOut',
+// 		duration: '4s',
+// 		easing: 'linear',
+// 		fillMode: 'backwards',
+// 		mixBlendMode: 'normal',
+// 	}
+// };
 
-const myFade = {
-	forwards: anim,
-	backwards: anim,
-};
+// const myFade = {
+// 	forwards: anim,
+// 	backwards: anim,
+// };
+// 【課題】【エラーにならないか検証目的】下記、animとmyFadeは定義されているが使われてない模様なので、コメントアウト　ここまで
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
@@ -275,6 +277,8 @@ init();
 
 /* Load settings before swapping */
 /* astro:after-swap event happened before swap animation */
+// astro:after-swapイベントは、ページ遷移のアニメーションが完了した後に発生します。
+// これにより、新しいページに遷移した後も上記の初期設定が再度行われます。
 document.addEventListener('astro:after-swap', init);
 
 // TypeScriptにwindowオブジェクトがswupプロパティを持つことを伝える
