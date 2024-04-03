@@ -5,21 +5,36 @@
 // フロントマターは、MarkdownやJekyllなどの他の静的サイトジェネレータでもよく使われています。
 // Astroでは、このフロントマター内にJavaScriptやTypeScriptのコードを記述することができます。
 import Layout from "./Layout.astro";
+// @は通常、プロジェクトのルートディレクトリを指します。
+// したがって、@components/Navbar.astroは、プロジェクトのルートディレクトリからのcomponents/Navbar.astroへのパスを表します。
 import Navbar from "@components/Navbar.astro";
 import SideBar from "@components/widget/SideBar.astro";
+// 下記、 {pathsEqual}の{}はJavaScriptのインポート構文の一部で、名前付きエクスポートをインポートするために使用されます。
 import {pathsEqual} from "@utils/url-utils";
 import Footer from "@components/Footer.astro";
 import BackToTop from "@components/control/BackToTop.astro";
 import {siteConfig} from "@/config";
 
+// TypeScriptの機能で、Propsという名前のインターフェースを定義しています。
+// これは、このコンポーネントが受け取ることができるプロパティを定義します。
+// この場合、titleとbannerの2つのプロパティを受け取ることができます。
+// titleは必須で、bannerはオプションです。(文末に?を付与することで、NoneやUndefinedを許容するオプションプロパティとして定義しています。)
 interface Props {
     title: string;
     banner?: string;
 }
 
+// Astroコンポーネントは、Astro.propsオブジェクトを通じてプロパティを受け取ります。
+// このオブジェクトは、コンポーネントに渡されたすべてのプロパティを含みます。
+// そして、interface Propsは、このAstro.propsオブジェクトが持つべきプロパティを定義します。
+// したがって、Astro.propsとinterface Propsは直接的には紐づいていませんが、
+// interface PropsはAstro.propsの形状を定義し、Astro.propsはその形状に従ってプロパティを受け取る、という関係があります。
 const { title, banner } = Astro.props
+// isHomePageは現在のURLがホームページのURLと一致するかどうかを判断するための定数です。
 const isHomePage = pathsEqual(Astro.url.pathname, '/')
+// enableBannerは設定からバナーが有効化されているかどうかを判断するための定数です。
 const enableBanner = siteConfig.banner.enable
+
 // このMainGridLayout.astroファイルは、Astro.jsを使用したウェブページのメインレイアウトを定義しています。
 // メインレイアウトは、ウェブサイトの全体的な枠組みを定義するもので、通常はヘッダー、ボディ（またはコンテンツエリア）、フッターなどの主要なセクションを含みます。
 // Asttro+Tailwind CSSでレイアウトの配置を担当するのは、Tailwind CSSとなります。
