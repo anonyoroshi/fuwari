@@ -18,6 +18,7 @@ let { title, banner } = Astro.props;
 
 const isHomePage = pathsEqual(Astro.url.pathname, '/');
 
+// 現在のURLのパス名を取得してtestPathNameという定数に格納しています。
 const testPathName = Astro.url.pathname;
 
 const anim = {

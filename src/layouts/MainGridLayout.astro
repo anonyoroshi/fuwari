@@ -89,6 +89,10 @@ const enableBanner = siteConfig.banner.enable
         <!-- main要素: ここにページの主要なコンテンツが表示されます。 -->        
         <!-- id="swup"は、SwupというJavaScriptライブラリを指定するために使用されています。このライブラリは、ページ遷移をスムーズにするためのものです。 -->
         <!-- transition-fadeは、ページ遷移時にフェードイン/フェードアウトのアニメーションを実行するためのクラスです。 -->
+        <!-- このswupのtransition-fadeクラスが保持するスタイルにより、ページ遷移時に、現在のページが徐々に透明になり、新しいページが徐々に表示されます。 -->
+        <!-- 更にこのtransition-fadeクラスは、GlobalStyles.astroに記述された、StylusというCSSプリプロセッサ言語を使用してグローバルCSSスタイル化されたCSS内部で、 -->
+        <!-- html.is-changing .transition-fadeと、html.is-animating .transition-fadeが設定されており、このStylusのスタイル定義は、Swupのtransition-fadeクラスを持つ要素に対して追加のスタイルを適用しています。 -->
+
         <!-- <slot></slot>タグは、このコンポーネントを使用する他のAstroファイルからのコンテンツを受け入れるためのプレースホルダーです。 -->
         <!-- したがって、<slot></slot>に表示されるコンテンツは、フェードイン/フェードアウトのアニメーション付きで表示されます。 -->
 
