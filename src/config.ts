@@ -1,11 +1,17 @@
+// 'types/config'ファイルから、SiteConfig、NavBarConfig、ProfileConfig、LicenseConfigの型をimportします。
+// これらの型は、後でオブジェクトを定義する際に使用します。
 import type {
   LicenseConfig,
   NavBarConfig,
   ProfileConfig,
   SiteConfig,
 } from './types/config'
+// 'types/config'ファイルからLinkPresetをimportします。
+//  LinkPresetには、Home = 0,  Archive = 1,  About = 2,といった値が定義されています。
 import { LinkPreset } from './types/config'
 
+// 上記でimportしたSiteConfig型を使用して、siteConfigオブジェクトを定義し、エクスポートします。
+// このオブジェクトは、サイトの設定を表すために使用されます。
 export const siteConfig: SiteConfig = {
   title: 'Fuwari',
   subtitle: 'Demo Site',
@@ -17,6 +23,8 @@ export const siteConfig: SiteConfig = {
   },
 }
 
+// ナビゲーションバーのリンクの設定を定義します。
+// NavBarConfig型で定義されており、linksというプロパティを持っています。
 export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,

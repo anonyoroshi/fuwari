@@ -46,17 +46,34 @@ const testPathName = Astro.url.pathname;
 // 【課題】【エラーにならないか検証目的】下記、animとmyFadeは定義されているが使われてない模様なので、コメントアウト　ここまで
 
 // defines global css variables
+// サイト全体で使用するCSS変数の定義を行うセクション
+// 全体のスタイルを定義するためにはGlobalStylesコンポーネントを使用し、ページのレイアウトを定義するためにはLayoutコンポーネントを使用するのが最善
+// 全体のスタイルをLayoutコンポーネントに移動すると、そのスタイルはLayoutコンポーネントを使用しないページには適用されません。これは、全体のスタイルを一貫して適用するための最善の方法ではないため。
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
+// なぜGlobalStylesではなくLayoutでCSS変数の定義を行うのか
+// Astro.jsの仕様について、Layoutコンポーネントは各ページで一度だけ読み込まれ、その設定は全ページに適用されます。
+// 一方、GlobalStylesなどの他のコンポーネントはページごとに再読み込みされ、その設定はページごとに再実行されます。
+// そのため、全ページで一貫した設定を適用するためには、Layoutコンポーネント内で設定を行うのが適切です。
+
+// サイトのテーマ色を設定しています。
 const configHue = siteConfig.themeHue;
+// 【バナーを動的に変更】bannerが未定義、または空文字列の場合、siteConfig.banner.srcからバナー画像のURLを取得して設定します
 if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 	banner = siteConfig.banner.src;
 }
 
 // TODO don't use post cover as banner for now
+// 現在のところ投稿のカバー画像をバナーとして使用しないようにするための一時的な処置として、siteConfig.banner.srcをバナー画像のURLとして設定しています。
+// つまり、srcに設定済みのassets/images/demo-banner.pngをbannerに設定しています。
 banner = siteConfig.banner.src;
-
+// バナーを表示するかどうかを制御するフラグを設定しています。
+// このフラグは、siteConfig.banner.enableの値を取得していますが、この値はconfig.tsファイルでFalseに設定されているため、バナーは表示されません。
 const enableBanner = siteConfig.banner.enable;
 
+// pageTitle変数を設定しています。
+// titleが存在する場合、titleとsiteConfig.titleを組み合わせてページタイトルを作成します。
+// titleが存在しない場合は、siteConfig.titleとsiteConfig.subtitleを組み合わせてページタイトルを作成します。
+// これにより、各ページで適切なタイトルが表示されます。
 let pageTitle;
 if (title) {
 	pageTitle = `${title} - ${siteConfig.title}`;

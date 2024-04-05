@@ -11,6 +11,7 @@ const className = Astro.props.class;
 
 let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset): NavBarLink => {
     if (typeof item === "number") {
+        // LinkPresets内で、実際のリンク情報を取得
         return LinkPresets[item]
     }
     return item;
