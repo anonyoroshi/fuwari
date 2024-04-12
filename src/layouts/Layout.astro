@@ -1,5 +1,7 @@
 ---
 import GlobalStyles from "@components/GlobalStyles.astro";
+// 以下は、nodeパッケージの@fontsource/robotoでインストールしたRobotoフォントを読み込んでいます。
+// 500は中程度の太さ、700は太い（bold）を表します。
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
@@ -9,6 +11,14 @@ import {pathsEqual} from "@utils/url-utils";
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import {siteConfig} from "@/config";
 
+// 下記PropsはTypeScriptのインターフェースを定義しています。
+// このインターフェースは、Astroコンポーネントに渡されるプロパティの型を定義しています。
+// この場合、Propsインターフェースはtitleという名前の文字列型のプロパティと、
+// bannerという名前のオプショナルな（つまり存在しなくても良い）文字列型のプロパティを持つことを要求しています。
+// 
+// Astro.jsやReactなどのコンポーネントベースのフレームワークでは、
+// Propsはコンポーネントに渡されるプロパティ（引数）の型を定義するためによく使われます。
+// これにより、コンポーネントが期待するプロパティの型を明示的に示すことができ、型安全性を向上させることができます。
 interface Props {
 	title: string;
 	banner?: string;
@@ -164,6 +174,11 @@ import {
 } from 'overlayscrollbars';
 import {getHue, setHue} from "../utils/setting-utils";
 
+// フォントのプリロードは、ウェブページのパフォーマンスを向上させるための一般的なテクニックですが、特に、ウェブフォントを使用する場合、フォントのダウンロードと解析に時間がかかるため、ページのレンダリングが遅延することがあります。
+// これは、れは「FOIT（Flash of Invisible Text）」または「FOUT（Flash of Unstyled Text）」と呼ばれます。
+// FOITは、フォントが読み込まれるまでテキストが完全に見えなくなる現象で、FOUTは、フォントが読み込まれるまでテキストがデフォルトのフォントで表示される現象です。これらの現象はユーザー体験を損なう可能性があります。
+// フォントのプリロードにより、これらの問題を緩和することができます。プリロードは、ブラウザに対して特定のリソース（この場合はフォント）を可能な限り早くダウンロードするように指示します。これにより、フォントの読み込みが完了するまでの時間を短縮し、FOITやFOUTを防ぐことができます。
+// ただし、プリロードはの重要なリソースのダウンロードを遅延させる可能性があるため、下記Preload fontsはFuwari作者によりコメントアウトされていると推測されます。
 	/* Preload fonts */
 // (async function() {
 // 	try {

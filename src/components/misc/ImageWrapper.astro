@@ -1,32 +1,57 @@
 ---
+// 【ファイル名】
+// /src/components/misc/ImageWrapper.astro
+// 【概要】
+// このImageWrapper.astroは、Astro.jsのコンポーネントで、ローカルの画像と外部の画像を表示するためのものです。
+// ローカルの画像は動的にインポートされ、外部の画像は直接URLを指定して表示されます。
+// また、画像の上に透明なレイヤーを重ねる機能もあります。
+
+// Node.jsのpathモジュールをインポートします。これはファイルパスの操作に使用します。
 import path from "path";
+
+// Propsインターフェースを定義します。これはこのコンポーネントが受け取るプロパティの型を定義します。
 interface Props {
-    id?: string
+    id?: string;
     src: string;
     class?: string;
-    alt?: string
-    basePath?: string
+    alt?: string;
+    basePath?: string;
+    overlayId?: string;
 }
+
+// AstroのassetsからImageコンポーネントをインポートします。これは画像を表示するために使用します。
 import { Image } from 'astro:assets';
 
+// Astro.propsから必要なプロパティを抽出します。basePathが未定義の場合は'/'をデフォルト値とします。
 const {id, src, alt, basePath = '/'} = Astro.props;
+// Astro.propsからclassプロパティを抽出し、classNameとして保存します。
 const className = Astro.props.class;
 
+// srcがローカルのパスを指しているかどうかを判断します。srcが'/', 'http', 'https', 'data:'で始まる場合は、ローカルのパスではないと判断します。
 const isLocal = !(src.startsWith('/') || src.startsWith('http') || src.startsWith('https') || src.startsWith('data:'));
 
-// TODO temporary workaround for images dynamic import
+// 【課題】画像の動的インポートの一時的な回避策
 // https://github.com/withastro/astro/issues/3373
 let img;
 if (isLocal) {
+    // ローカルの画像ファイルを動的にインポートします。
     const files = import.meta.glob<ImageMetadata>("../../**", { import: 'default' });
+    // basePathとsrcを結合し、正規化したパスを作成します。Windowsのパス区切り文字をUnixスタイルに変換します。
     let normalizedPath = path.normalize(path.join("../../", basePath, src)).replace(/\\/g, "/");
+    // 正規化したパスに対応する画像をインポートします。
     img = await (files[normalizedPath])();
 }
 
+// 以下はHTML部分です。
 ---
 <div class:list={[className, 'overflow-hidden relative']}>
-    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+    <!-- 画像の上に表示する透明なレイヤーを作成します。これは画像の上に色を重ねるために使用します。 -->
+    <!-- また、透明なレイヤー用のIDとして、overlayIdという名称でプロパティを指定しています。 -->
+    <!-- CSSやJavaScriptからこのIDを使用してレイヤーに対する操作を行うことができます。 -->
+    <div id={Astro.props.overlayId} class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+    <!-- srcがローカルのパスを指している場合は、Imageコンポーネントを使用して画像を表示します。 -->
     {isLocal && <Image src={img} alt={alt || ""} class="w-full h-full object-center object-cover" />}
+    <!-- srcがローカルのパスを指していない場合は、img要素を使用して画像を表示します。 -->
     {!isLocal && <img src={src} alt={alt || ""} class="w-full h-full object-center object-cover" />}
 </div>
 
