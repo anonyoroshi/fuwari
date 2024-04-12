@@ -61,6 +61,9 @@ export const profileConfig: ProfileConfig = {
   ],
 }
 
+// 以下のLicenseConfigは、ウェブページ上の特定のコンテンツ（たとえばブログ記事や写真など）の使用を規定するものである。
+// このオブジェクトは、Fuwariでは、ブログ記事のライセンス情報を表すために使用されており、CC BY-NC-SA 4.0は、非営利と適切なクレジットを提供し、ライセンスへのリンクを提供することが求められている。
+// プロジェクト全体のライセンスは、ルートディレクトリ上のLICENSEファイル内にMITライセンスが記載されている。
 export const licenseConfig: LicenseConfig = {
   enable: true,
   name: 'CC BY-NC-SA 4.0',
