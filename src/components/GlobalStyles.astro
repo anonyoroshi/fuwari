@@ -13,22 +13,30 @@
 <style is:global lang="stylus">
 
 /* utils */
+/* 白色の透明度を調整する関数 */
 white(a)
   rgba(255, 255, 255, a)
 
+/* 黒色の透明度を調整する関数 */
 black(a)
   rgba(0, 0, 0, a)
 
+/* OKLCH色空間の色かどうかを判定する関数 */
 isOklch(c)
   return substr(c, 0, 5) == 'oklch'
 
+/* OKLCH色空間の色をフォールバック色に変換する関数 */
 oklch_fallback(c)
   str = '' + c    // convert color value to string
   if isOklch(str)
     return convert(oklchToHex(str))
   return c
 
+/* 色のセットを定義する関数 */
 color_set(colors)
+  /* 接続ブラウザがOKLCH色空間がサポートされているかを下記、CSSの機能検出ルール(oklch(0 0 0))を使用して確認 */
+  /* 接続ブラウザがOKLCH色空間をサポートしている場合の処理 */
+  /* OKLCH色空間の色をそのまま使用 */
   @supports (color: oklch(0 0 0))
     :root
       for key, value in colors
@@ -37,7 +45,8 @@ color_set(colors)
       for key, value in colors
         if length(value) > 1
           {key}: value[1]
-  /* provide fallback color for oklch */
+  /* 接続ブラウザがOKLCH色空間をサポートしていない場合の処理 */
+  /* OKLCH色空間の色をHEX色に変換してフォールバック色として使用 */
   @supports not (color: oklch(0 0 0))
     :root
       for key, value in colors
@@ -47,9 +56,11 @@ color_set(colors)
         if length(value) > 1
           {key}: oklch_fallback(value[1])
 
+/* ライトモードとダークモードでのグラデーション色を定義 */
 rainbow-light = linear-gradient(to right, oklch(0.80 0.10 0), oklch(0.80 0.10 30), oklch(0.80 0.10 60), oklch(0.80 0.10 90), oklch(0.80 0.10 120), oklch(0.80 0.10 150), oklch(0.80 0.10 180), oklch(0.80 0.10 210), oklch(0.80 0.10 240), oklch(0.80 0.10 270), oklch(0.80 0.10 300), oklch(0.80 0.10 330), oklch(0.80 0.10 360))
 rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30), oklch(0.70 0.10 60), oklch(0.70 0.10 90), oklch(0.70 0.10 120), oklch(0.70 0.10 150), oklch(0.70 0.10 180), oklch(0.70 0.10 210), oklch(0.70 0.10 240), oklch(0.70 0.10 270), oklch(0.70 0.10 300), oklch(0.70 0.10 330), oklch(0.70 0.10 360))
 
+/* ルート要素のスタイルを定義 */
 :root
   --radius-large 1rem
 
@@ -58,6 +69,7 @@ rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30)
 
   --content-delay 150ms
 
+/* 色のセットを適用 */
 color_set({
   --primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue))
   --page-bg: oklch(0.95 0.01 var(--hue)) oklch(0.16 0.014 var(--hue))
