@@ -269,46 +269,56 @@ utilitiesレイヤーは最も高い優先度を持ち、ユーティリティ�
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
     }
+    /* カードにオブジェクトの影のように見える視覚効果を追加 */
     .card-shadow {
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
+    /* リンクの基本スタイルを定義 */
     .link {
         @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1 -m-1;
     }
+    /* 大きなリンクのスタイルを定義 */
     .link-lg {
         @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1.5 -m-1.5;
     }
+    /* フロートパネルの基本スタイルを定義 */
     .float-panel {
         @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
     }
+    /* 閉じた状態のフロートパネルのスタイルを定義 */
     .float-panel.closed {
         @apply top-[4.75rem] opacity-0 pointer-events-none
     }
+    /* 検索パネルのマークスタイルを定義 */
     .search-panel mark {
         @apply bg-transparent text-[var(--primary)]
     }
-
+    /* カードボタンのスタイルを定義 */
     .btn-card {
         @apply transition flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
         active:bg-[var(--btn-card-bg-active)]
     }
+    /* 無効化されたカードボタンのスタイルを定義 */
     .btn-card.disabled {
         @apply pointer-events-none text-black/10 dark:text-white/10
     }
+    /* プレーンボタンのスタイルを定義 */
     .btn-plain {
         @apply transition flex items-center justify-center bg-none hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
         text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)]
     }
+    /* レギュラーボタンのスタイルを定義 */
     .btn-regular {
         @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
         text-[var(--btn-content)] dark:text-white/75
     }
-
+    /* 下線付きリンクのスタイルを定義 */
     .link-underline {
         @apply transition underline decoration-2 decoration-dashed decoration-[var(--link-underline)]
         hover:decoration-[var(--link-hover)] active:decoration-[var(--link-active)] underline-offset-[0.25rem]
     }
 
+    /* テキストの透明度n%(下記例では、25%～90%)のスタイルを定義 */
     .text-90 {
         @apply text-black/90 dark:text-white/90
     }
@@ -324,10 +334,13 @@ utilitiesレイヤーは最も高い優先度を持ち、ユーティリティ�
     .text-25 {
         @apply text-black/25 dark:text-white/25
     }
-
+    /* 変化中のHTML要素にフェードトランジションを適用 */
+    /* 下記では、すべてのプロパティにトランジション効果を適用し、そのトランジションの持続時間を200ミリ秒(0.2秒)に設定します。 */
     html.is-changing .transition-fade {
         @apply transition-all duration-200
     }
+    /* アニメーション中のHTML要素にフェードトランジションを適用 */
+    /* 下記では、要素の透明度を0に設定し（完全に透明）、要素をY軸方向（垂直方向）に-4単位(つまり、要素を下に4単位)移動します。 */
     html.is-animating .transition-fade {
         @apply opacity-0 translate-y-4
     }
