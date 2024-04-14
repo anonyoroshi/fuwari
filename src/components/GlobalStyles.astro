@@ -346,6 +346,9 @@ utilitiesレイヤーは最も高い優先度を持ち、ユーティリティ�
     }
 }
 
+/* fade-in-upという名前のキーフレームアニメーションを定義します。 */
+/* アニメーションの開始時点（0%）では、要素はY軸方向に2rem下に移動し、透明度は0（完全に透明）です。 */
+/* アニメーションの終了時点（100%）では、要素は元の位置（translateY(0)）に戻り、透明度は1（完全に不透明）になります。 */
 @keyframes fade-in-up {
     0% {
         transform: translateY(2rem);
@@ -356,20 +359,31 @@ utilitiesレイヤーは最も高い優先度を持ち、ユーティリティ�
         opacity: 1;
     }
 }
+/* onload-animationクラスを持つ要素に対するスタイルを定義します。 */
+/* 初期状態では、要素の透明度は0（完全に透明）です。 */
+/* また、fade-in-upアニメーションを300ミリ秒で適用し、アニメーションが終了した後も最終フレームのスタイルを保持します（animation-fill-mode: forwards）。 */
 .onload-animation {
     opacity: 0;
     animation: 300ms fade-in-up;
     animation-fill-mode: forwards;
 }
+/* #top-row要素に対するスタイルを定義します。 */
+/* アニメーションの開始を遅延させる時間を0ミリ秒に設定します（即時開始）。 */
 #top-row {
     animation-delay: 0ms
 }
+/* #sidebar要素に対するスタイルを定義します。 */
+/* アニメーションの開始を遅延させる時間を100ミリ秒に設定します。 */
 #sidebar {
     animation-delay: 100ms
 }
+/* #content-wrapper要素に対するスタイルを定義します。 */
+/* アニメーションの開始を遅延させる時間を、CSSカスタムプロパティ(content-delay)の値に設定します。 */
 #content-wrapper {
     animation-delay: var(--content-delay);
 }
+/* #footer要素に対するスタイルを定義します。 */
+/* アニメーションの開始を遅延させる時間を400ミリ秒に設定します。 */
 #footer {
     animation-delay: 400ms;
 }
