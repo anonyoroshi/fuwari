@@ -179,10 +179,12 @@ color_set({
 })
 
 
-/* some global styles */
+/* 一部のグローバルスタイル */
+/* ユーザーがテキストを選択したときの背景色を設定 */
 ::selection
   background-color: var(--selection-bg)
 
+/* スクロールバーの基本スタイルを設定 */
 .scrollbar-base.os-scrollbar
   transition: width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s, visibility 0.15s, top 0.15s, right 0.15s, bottom 0.15s, left 0.15s;
   pointer-events: unset;
@@ -213,26 +215,31 @@ color_set({
       padding-top: 4px;
       padding-bottom: 4px;
 
+/* 自動スクロールバーのスタイルを設定 */
 .scrollbar-auto
   &.os-scrollbar
     --os-handle-bg: var(--scrollbar-bg);
     --os-handle-bg-hover: var(--scrollbar-bg-hover);
     --os-handle-bg-active: var(--scrollbar-bg-active);
 
+/* ダークテーマのスクロールバーのスタイルを設定 */
 .scrollbar-dark
   &.os-scrollbar
     --os-handle-bg: var(--scrollbar-bg-dark);
     --os-handle-bg-hover: var(--scrollbar-bg-hover-dark);
     --os-handle-bg-active: var(--scrollbar-bg-active-dark);
 
+/* ライトテーマのスクロールバーのスタイルを設定 */
 .scrollbar-light
   &.os-scrollbar
     --os-handle-bg: var(--scrollbar-bg-light);
     --os-handle-bg-hover: var(--scrollbar-bg-hover-light);
-    --os-handle-bg-active: var(--scrollbar-bg-active-light);
+    --os-handle-bg-active: var(--scrollbar-bg-active-light);    
 
 
 </style>
+
+
 <style is:global>
 @tailwind base;
 @tailwind components;
