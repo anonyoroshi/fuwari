@@ -65,11 +65,20 @@ export type Category = {
   count: number
 }
 
+// このgetCategoryList関数は、すべてのブログ投稿からカテゴリを抽出し、それぞれのカテゴリに属する投稿の数をカウントします。
+// そして、カテゴリをアルファベット順にソートし、それぞれのカテゴリとそのカウントを持つオブジェクトの配列を返します。
 export async function getCategoryList(): Promise<Category[]> {
+  // 'posts'コレクションからすべてのブログ投稿を取得します。
+  // PROD環境では、ドラフトの投稿は除外されます。
   const allBlogPosts = await getCollection('posts', ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true
   })
+
+  // カテゴリとそのカテゴリに属する投稿の数を格納するオブジェクトを作成します。
   const count: { [key: string]: number } = {}
+
+  // 各投稿について、そのカテゴリをキーとしてカウントを増やします。
+  // カテゴリが設定されていない投稿は「未分類」にカウントされます。
   allBlogPosts.map(post => {
     if (!post.data.category) {
       const ucKey = i18n(I18nKey.uncategorized)
@@ -81,13 +90,17 @@ export async function getCategoryList(): Promise<Category[]> {
       : 1
   })
 
+  // カテゴリをアルファベット順にソートします。
   const lst = Object.keys(count).sort((a, b) => {
     return a.toLowerCase().localeCompare(b.toLowerCase())
   })
 
+  // ソートされたカテゴリとそのカウントを持つオブジェクトの配列を作成します。
   const ret: Category[] = []
   for (const c of lst) {
     ret.push({ name: c, count: count[c] })
   }
+
+  // カテゴリとそのカウントを持つオブジェクトの配列を返します。
   return ret
 }
