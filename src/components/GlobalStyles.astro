@@ -117,65 +117,65 @@ button {
 当該ミックスイン(関数)経由でユーザーのWEBUI上にOKLCH色空間又は、フォールバック色を適用します。
 */
 color_set({
-  --primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue))
-  --page-bg: oklch(0.95 0.01 var(--hue)) oklch(0.16 0.014 var(--hue))
-  --card-bg: white oklch(0.23 0.015 var(--hue))
+  --primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue)) // 主要な色
+  --page-bg: oklch(0.95 0.01 var(--hue)) oklch(0.16 0.014 var(--hue)) // ページの背景色
+  --card-bg: white oklch(0.23 0.015 var(--hue)) // カードの背景色
 
-  --btn-content: oklch(0.55 0.12 var(--hue)) oklch(0.75 0.1 var(--hue))
+  --btn-content: oklch(0.55 0.12 var(--hue)) oklch(0.75 0.1 var(--hue)) // ボタンの内容の色
 
-  --btn-regular-bg: oklch(0.95 0.025 var(--hue)) oklch(0.33 0.035 var(--hue))
-  --btn-regular-bg-hover: oklch(0.9 0.05 var(--hue)) oklch(0.38 0.04 var(--hue))
-  --btn-regular-bg-active: oklch(0.85 0.08 var(--hue)) oklch(0.43 0.045 var(--hue))
+  --btn-regular-bg: oklch(0.95 0.025 var(--hue)) oklch(0.33 0.035 var(--hue)) // 通常のボタンの背景色
+  --btn-regular-bg-hover: oklch(0.9 0.05 var(--hue)) oklch(0.38 0.04 var(--hue)) // ホバー時の通常のボタンの背景色
+  --btn-regular-bg-active: oklch(0.85 0.08 var(--hue)) oklch(0.43 0.045 var(--hue)) // アクティブ時の通常のボタンの背景色
 
-  --btn-plain-bg-hover: oklch(0.95 0.025 var(--hue)) oklch(0.17 0.017 var(--hue))
-  --btn-plain-bg-active: oklch(0.98 0.01 var(--hue)) oklch(0.19 0.017 var(--hue))
+  --btn-plain-bg-hover: oklch(0.95 0.025 var(--hue)) oklch(0.17 0.017 var(--hue)) // ホバー時のプレーンボタンの背景色
+  --btn-plain-bg-active: oklch(0.98 0.01 var(--hue)) oklch(0.19 0.017 var(--hue)) // アクティブ時のプレーンボタンの背景色
 
-  --btn-card-bg-hover: oklch(0.98 0.005 var(--hue)) oklch(0.3 0.03 var(--hue))
-  --btn-card-bg-active: oklch(0.9 0.03 var(--hue)) oklch(0.35 0.035 var(--hue))
+  --btn-card-bg-hover: oklch(0.98 0.005 var(--hue)) oklch(0.3 0.03 var(--hue)) // ホバー時のカードボタンの背景色
+  --btn-card-bg-active: oklch(0.9 0.03 var(--hue)) oklch(0.35 0.035 var(--hue)) // アクティブ時のカードボタンの背景色
 
-  --enter-btn-bg: var(--btn-regular-bg)
-  --enter-btn-bg-hover: var(--btn-regular-bg-hover)
-  --enter-btn-bg-active: var(--btn-regular-bg-active)
+  --enter-btn-bg: var(--btn-regular-bg) // 入力ボタンの背景色
+  --enter-btn-bg-hover: var(--btn-regular-bg-hover) // ホバー時の入力ボタンの背景色
+  --enter-btn-bg-active: var(--btn-regular-bg-active) // アクティブ時の入力ボタンの背景色
 
-  --deep-text: oklch(0.25 0.02 var(--hue))
+  --deep-text: oklch(0.25 0.02 var(--hue)) // 深いテキストの色
 
-  --title-active: oklch(0.6 0.1 var(--hue))
+  --title-active: oklch(0.6 0.1 var(--hue)) // アクティブなタイトルの色
 
-  --line-divider: black(0.08) white(0.08)
+  --line-divider: black(0.08) white(0.08) // ラインディバイダーの色
 
-  --line-color: black(0.1) white(0.1)
-  --meta-divider: black(0.2) white(0.2)
+  --line-color: black(0.1) white(0.1) // ラインの色
+  --meta-divider: black(0.2) white(0.2) // メタディバイダーの色
 
-  --inline-code-bg: var(--btn-regular-bg)
-  --inline-code-color: var(--btn-content)
-  --selection-bg: oklch(0.90 0.05 var(--hue)) oklch(0.40 0.08 var(--hue))
-  --codeblock-selection: oklch(0.40 0.08 var(--hue))
-  --codeblock-bg: oklch(0.2 0.015 var(--hue)) oklch(0.17 0.015 var(--hue))
+  --inline-code-bg: var(--btn-regular-bg) // インラインコードの背景色
+  --inline-code-color: var(--btn-content) // インラインコードの色
+  --selection-bg: oklch(0.90 0.05 var(--hue)) oklch(0.40 0.08 var(--hue)) // 選択部分の背景色
+  --codeblock-selection: oklch(0.40 0.08 var(--hue)) // コードブロックの選択部分の色
+  --codeblock-bg: oklch(0.2 0.015 var(--hue)) oklch(0.17 0.015 var(--hue)) // コードブロックの背景色
 
-  --license-block-bg: black(0.03) var(--codeblock-bg)
+  --license-block-bg: black(0.03) var(--codeblock-bg) // ライセンスブロックの背景色
 
-  --link-underline: oklch(0.93 0.04 var(--hue)) oklch(0.40 0.08 var(--hue))
-  --link-hover: oklch(0.95 0.025 var(--hue)) oklch(0.40 0.08 var(--hue))
-  --link-active: oklch(0.90 0.05 var(--hue)) oklch(0.35 0.07 var(--hue))
+  --link-underline: oklch(0.93 0.04 var(--hue)) oklch(0.40 0.08 var(--hue)) // リンクの下線の色
+  --link-hover: oklch(0.95 0.025 var(--hue)) oklch(0.40 0.08 var(--hue)) // ホバー時のリンクの色
+  --link-active: oklch(0.90 0.05 var(--hue)) oklch(0.35 0.07 var(--hue)) // アクティブなリンクの色
 
-  --float-panel-bg: white oklch(0.19 0.015 var(--hue))
+  --float-panel-bg: white oklch(0.19 0.015 var(--hue)) // フロートパネルの背景色
 
-  --scrollbar-bg-light: black(0.4)
-  --scrollbar-bg-hover-light: black(0.5)
-  --scrollbar-bg-active-light: black(0.6)
+  --scrollbar-bg-light: black(0.4) // ライトテーマのスクロールバーの背景色
+  --scrollbar-bg-hover-light: black(0.5) // ライトテーマのホバー時のスクロールバーの背景色
+  --scrollbar-bg-active-light: black(0.6) // ライトテーマのアクティブ時のスクロールバーの背景色
 
-  --scrollbar-bg-dark: white(0.4)
-  --scrollbar-bg-hover-dark: white(0.5)
-  --scrollbar-bg-active-dark: white(0.6)
+  --scrollbar-bg-dark: white(0.4) // ダークテーマのスクロールバーの背景色
+  --scrollbar-bg-hover-dark: white(0.5) // ダークテーマのホバー時のスクロールバーの背景色
+  --scrollbar-bg-active-dark: white(0.6) // ダークテーマのアクティブ時のスクロールバーの背景色
 
-  --scrollbar-bg: var(--scrollbar-bg-light) var(--scrollbar-bg-dark)
-  --scrollbar-bg-hover: var(--scrollbar-bg-hover-light) var(--scrollbar-bg-hover-dark)
-  --scrollbar-bg-active: var(--scrollbar-bg-active-light) var(--scrollbar-bg-active-dark)
+  --scrollbar-bg: var(--scrollbar-bg-light) var(--scrollbar-bg-dark) // スクロールバーの背景色
+  --scrollbar-bg-hover: var(--scrollbar-bg-hover-light) var(--scrollbar-bg-hover-dark) // ホバー時のスクロールバーの背景色
+  --scrollbar-bg-active: var(--scrollbar-bg-active-light) var(--scrollbar-bg-active-dark) // アクティブ時のスクロールバーの背景色
 
-  --color-selection-bar: rainbow-light rainbow-dark
+  --color-selection-bar: rainbow-light rainbow-dark // 色選択バーの色
 
-  --display-light-icon: 1 0
-  --display-dark-icon: 0 1
+  --display-light-icon: 1 0 // ライトアイコンの表示
+  --display-dark-icon: 0 1 // ダークアイコンの表示
 })
 
 
