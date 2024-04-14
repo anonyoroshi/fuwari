@@ -104,13 +104,17 @@ rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30)
 /* 一方、コロンがつかない場合、それはCSSカスタムプロパティを参照しています。例えば、var(--radius-large)は、--radius-largeという名前のCSSカスタムプロパティの値を取得します。 */
 /* 例えば、--primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue))は、--primaryという名前のCSSカスタムプロパティに、oklch(0.70 0.14 var(--hue))とoklch(0.75 0.14 var(--hue))という2つの色を定義します。 */
 /* 
-そし、以下のように、CSSカスタムプロパティを使用して、ボタンの背景色を設定することができます。
+また、以下のように、CSSカスタムプロパティを使用して、ボタンの背景色を設定することなども可能です。
 この例では、button要素の背景色を--primaryの値に設定しています。var(--primary)は、--primaryという名前のCSSカスタムプロパティの現在の値を取得します。
 button {
   background-color: var(--primary);
 }
 --primaryは、2つの色値を保持しており、本プロジェクトではそれぞれはライトテーマとダークテーマで使用される値となります。
 このように、CSSカスタムプロパティとメディアクエリやJavaScriptを使用することで、現在のテーマに応じてテーマカラーを簡単に変更することができます。
+*/
+/* 
+このファイル内で定義したstylusのcolor_setミックスイン(関数)を使用して、ライト又はダークテーマや各WEBUI部品の色のセットを引数として取得し、
+当該ミックスイン(関数)経由でユーザーのWEBUI上にOKLCH色空間又は、フォールバック色を適用します。
 */
 color_set({
   --primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue))
