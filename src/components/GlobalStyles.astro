@@ -241,14 +241,31 @@ color_set({
 
 
 <style is:global>
+/* Tailwind CSSの基本、コンポーネント、ユーティリティスタイルを適用 */
+/*
+Tailwind CSSは、ユーティリティファーストのCSSフレームワークで、スタイルをレイヤーに分けて管理します。
+これらのレイヤーは、base、components、utilitiesの3つがあります。
+
+baseレイヤーは最も低い優先度を持ち、ブラウザのデフォルトスタイルをリセットし、新しいデフォルトスタイルを設定します。
+componentsレイヤーは中間の優先度を持ち、再利用可能なコンポーネントのスタイルを定義します。
+  これは、ボタンやカードなどのコンポーネントに対するスタイルを定義するために使用されます。
+utilitiesレイヤーは最も高い優先度を持ち、ユーティリティクラスを定義します。
+  これは、marginやpadding、colorなどの単一のプロパティを操作するためのクラスを提供します。
+したがって、同じCSSプロパティを持つスタイルが複数のレイヤーで定義されている場合、utilitiesレイヤーのスタイルが最終的に適用されます。
+  これは、ユーティリティファーストの設計原則に基づいており、ユーティリティクラスを使用して細かいスタイル調整を行うことを可能にしています。
+*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* @layer componentsは、その後に続くスタイルがcomponentsレイヤーに追加されることを意味します。 */
+/* これにより、そのスタイルはbaseレイヤーとutilitiesレイヤーの間、つまり全てのユーティリティクラスよりも優先度が低く、baseスタイルよりも優先度が高くなります。 */
 @layer components {
+    /* カードの基本スタイルを定義 */
     .card-base {
         @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
     }
+    /* 一般的なHTML要素にトランジション効果を適用 */
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
     }
