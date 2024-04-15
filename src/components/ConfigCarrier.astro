@@ -1,8 +1,12 @@
 ---
-
+// src/components/ConfigCarrier.astro
+// 【概要】サイトの設定情報（具体的にはテーマの色相）をHTML要素のデータ属性として提供する機能を提供するコンポーネント
+// src/config.ts からsiteConfigをインポートしています。
 import {siteConfig} from "../config";
 
 ---
-
+<!-- data-hueはHTML5のデータ属性で、JavaScriptから簡単にアクセスできるように任意のデータをHTML要素に格納するためのものです。 -->
+<!-- ここではsiteConfigのthemeHueプロパティの値を格納しています。 -->
+<!-- <div>要素は、JavaScriptからサイトのテーマ色（hue）を取得して運ぶための"キャリア"として機能しており、JavaScriptはこの要素のdata-hue属性を読み取ることで、サイトのテーマ色を取得できます。 -->
 <div id="config-carrier" data-hue={siteConfig.themeHue}>
 </div>
