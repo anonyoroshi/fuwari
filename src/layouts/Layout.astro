@@ -1,16 +1,22 @@
 ---
+// @エイリアスはastro.jsでは、デフォルトで@がソースディレクトリ（通常はsrc/）を指すように設定されており、astro.config.js又はastro.config.mjsファイルで変更することができます。
+// 本プロジェクトはデフォルト通りであるため、@エイリアスを使用して、src/ディレクトリ内のファイルをインポートしています。
 import GlobalStyles from "@components/GlobalStyles.astro";
 // 以下は、nodeパッケージの@fontsource/robotoでインストールしたRobotoフォントを読み込んでいます。
 // 500は中程度の太さ、700は太い（bold）を表します。
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+// ローカルの画像と外部の画像を表示するためのImageWrapperコンポーネントをインポートしています。
+// ローカルの画像は動的にインポートされ、外部の画像は直接URLを指定して表示されます。
+// また、画像の上に透明なレイヤーを重ねる機能もあります。
 import ImageWrapper from "@components/misc/ImageWrapper.astro";
 
 // URLの生成、パスの比較、ディレクトリの取得など、URLとパスに関連する操作を行うためのユーティリティ関数をインポートしています。
 import {pathsEqual} from "@utils/url-utils";
-// 
+// サイトの設定情報（具体的にはテーマの色相）を取得するためにConfigCarrierコンポーネントをインポートしています。
 import ConfigCarrier from "@components/ConfigCarrier.astro";
+// @エイリアスにより、src/congif.tsファイルから、siteConfigという名前のオブジェクトをインポートして、サイト設定情報を取得しています。
 import {siteConfig} from "@/config";
 
 // 下記PropsはTypeScriptのインターフェースを定義しています。
