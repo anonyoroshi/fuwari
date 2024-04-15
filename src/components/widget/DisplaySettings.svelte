@@ -1,3 +1,10 @@
+<!-- このSvelteコンポーネントは、ユーザーがテーマの色相（hue）を調整できるUIを提供します。 -->
+<!-- 
+  スクリプト部分では、色相の値を取得、設定、リセットするための関数をインポートしています。
+  hueは現在の色相を保持し、defaultHueはデフォルトの色相を保持します。
+  resetHue関数は色相をデフォルトにリセットします。
+  また、hueの値が変更されるたびに、setHue関数が呼び出されて色相が更新されます。
+-->
 <script lang="ts">
 import {i18n} from '@i18n/translation';
 import I18nKey from '@i18n/i18nKey';
@@ -15,6 +22,10 @@ $: if (hue || hue === 0) {
 }
 </script>
 
+<!-- 
+マークアップ部分では、色相の値を表示し、リセットボタンを提供し、色相を調整するためのスライダーを提供しています。
+リセットボタンは、現在の色相がデフォルトの色相と同じ場合には非活性化されます。
+-->
 <div id="display-setting" class="float-panel closed absolute transition-all w-80 fixed right-4 px-4 py-4">
     <div class="flex flex-row gap-2 mb-3 items-center justify-between">
         <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
@@ -42,7 +53,10 @@ $: if (hue || hue === 0) {
     </div>
 </div>
 
-
+<!-- 
+スタイル部分では、スライダーの見た目をカスタマイズしています。
+特に、スライダーのつまみ部分のスタイルを各ブラウザに対応する形で定義しています。
+-->
 <style lang="stylus">
   #display-setting
     input[type="range"]
