@@ -1,4 +1,6 @@
 ---
+// src/components/Navbar.astro
+// AstroとSvelteを使用して作成されたナビゲーションバーのコンポーネントです。
 import { Icon } from 'astro-icon/components';
 import DisplaySettings from "./widget/DisplaySettings.svelte";
 import { LinkPreset } from "../types/config";
@@ -6,9 +8,15 @@ import { type NavBarLink } from "../types/config";
 import {navBarConfig, siteConfig} from "../config";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
 import Search from "./Search.svelte";
+// navBarConfig.links.map関数で利用するために、LinkPresets(homeやaboutなどの実際のリンク情報セット)をインポートします。
 import {LinkPresets} from "../constants/link-presets";
 const className = Astro.props.class;
 
+// 1. ナビゲーションバーのリンクは、configファイル内の`navBarConfig.links`から取得され、それぞれが`NavBarLink`型または`LinkPreset`型です。
+// `LinkPreset`は数値で、対応するリンク情報を`LinkPresets`から取得します。
+// map関数を使用してNavBarLink型の配列に変換されます。この変換過程で、LinkPresetの値は対応するリンク情報に置き換えられます。
+// 結果として、このコードはナビゲーションバーのリンクの設定を柔軟に管理することを可能にします。
+// プリセットのリンク（LinkPreset）とカスタムのリンク（直接オブジェクト）を混在させることができ、それらを統一的に扱うことができます。
 let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset): NavBarLink => {
     if (typeof item === "number") {
         // LinkPresets内で、実際のリンク情報を取得
@@ -18,6 +26,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
 });
 
 ---
+<!-- 2. ナビゲーションバーデザイン部分には、サイトのタイトルとホームへのリンク、ナビゲーションリンク、検索バー、表示設定ボタン、ライト/ダークモード切り替えボタン、メニューボタンを含みます。 -->
 <div class:list={[
     className,
     "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[4.5rem] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
@@ -69,6 +78,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
 
 <script>
 
+// テーマの切り替えを行う関数
 function switchTheme() {
     if (localStorage.theme === 'dark') {
         document.documentElement.classList.remove('dark');
@@ -79,6 +89,8 @@ function switchTheme() {
     }
 }
 
+// 3. ボタンのクリックイベントは、`loadButtonScript`関数で設定されます。
+// これには、テーマの切り替え、表示設定パネルの表示/非表示、ナビゲーションメニューパネルの表示/非表示が含まれます。
 function loadButtonScript() {
     let switchBtn = document.getElementById("scheme-switch");
     switchBtn.addEventListener("click", function () {
@@ -100,11 +112,15 @@ function loadButtonScript() {
 
 loadButtonScript();
 
+// 4. Astroの`astro:after-swap`イベントリスナーは、ページが切り替えられた後に`loadButtonScript`を再度呼び出します。
+// これにより、新しいページでもボタンのイベントが正しく設定されます。
 document.addEventListener('astro:after-swap', () => {
     loadButtonScript();
 }, { once: false });
 </script>
 
+<!-- 5. 最後に、本番環境では`loadPagefind`関数が呼び出され、ページ検索機能が初期化されます。 -->
+<!-- import.meta.env.PRODがtrue(つまり、現在が本番環境Production Environment)の場合にのみ、script is:raw以下のコードが実行されます。 -->
 {import.meta.env.PROD && <script is:raw>
 async function loadPagefind() {
     const pagefind = await import('/pagefind/pagefind.js')

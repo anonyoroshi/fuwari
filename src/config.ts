@@ -35,8 +35,12 @@ export const siteConfig: SiteConfig = {
 }
 
 // ナビゲーションバーのリンクの設定を定義します。
-// NavBarConfig型で定義されており、linksというプロパティを持っています。
+// NavBarConfig型で定義されており、linksというプロパティを持っています。linksは配列で、その要素はLinkPresetの値またはカスタムのオブジェクトです。
+// LinkPresetは列挙型で、それぞれの値は特定のリンクを表しています（例：Home、Archive、About）。
+// これらの値は、LinkPresetsという別のオブジェクトで詳細なリンク情報（URLなど）にマッピングされます。
 // 【概要】navBarConfig：ナビゲーションバーのリンクの設定を管理します。リンクはLinkPresetの値またはカスタムのオブジェクトで定義できます。
+// 一方、カスタムのオブジェクトは直接リンク情報を含んでいます。このオブジェクトはname、url、externalの3つのプロパティを持っています。
+// nameはリンクの名前、urlはリンクのURL、externalはリンクが外部リンクかどうかを示すブール値です。
 export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
